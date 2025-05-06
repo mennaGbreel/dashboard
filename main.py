@@ -1,361 +1,242 @@
-# mental_stress_dashboard.py – Streamlit app with 10 distinct charts
-# Author: ChatGPT (OpenAI o3)
-# -----------------------------------------------------------------------------
-# This version guards against optional dependencies (Plotly, WordCloud) not being
-# present in the execution environment, so the app fails gracefully instead of
-# crashing with ModuleNotFoundError.
-# -----------------------------------------------------------------------------
-
+#############################
+#  app.py  –  Mental‑Health Dashboard
+#############################
 import streamlit as st
 import pandas as pd
 import altair as alt
-import matplotlib.pyplot as plt
-import numpy as np
+import plotly.express as px
+import nltk, re
+from collections import Counter
+from pathlib import Path
 
-# -----------------------------------------------------------------------------
-# Optional libraries – guarded imports
-# -----------------------------------------------------------------------------
-try:
-    import plotly.express as px  # type: ignore
-    HAS_PLOTLY = True
-except ModuleNotFoundError:
-    HAS_PLOTLY = False
-
-try:
-    from wordcloud import WordCloud  # type: ignore
-    HAS_WORDCLOUD = True
-except ModuleNotFoundError:
-    HAS_WORDCLOUD = False
-
-# -----------------------------------------------------------------------------
-# Page configuration & theme
-# -----------------------------------------------------------------------------
+# ───────────────────────────
+# Page config & theme
+# ───────────────────────────
 st.set_page_config(
-    page_title="US Population Dashboard",  # keep original title for continuity
-    page_icon="🏂",
+    page_title="US Student‑Mental‑Health Dashboard",
+    page_icon="💡",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="expanded"
 )
 alt.themes.enable("dark")
 
-# -----------------------------------------------------------------------------
-# Custom CSS tweaks (unchanged from the user's snippet)
-# -----------------------------------------------------------------------------
-st.markdown(
-    """
-    <style>
-    [data-testid="block-container"] {
-        padding-left: 2rem;
-        padding-right: 2rem;
-        padding-top: 1rem;
-        padding-bottom: 0rem;
-        margin-bottom: -7rem;
-    }
-    [data-testid="stVerticalBlock"] {
-        padding-left: 0rem;
-        padding-right: 0rem;
-    }
-    [data-testid="stMetric"] {
-        background-color: #393939;
-        text-align: center;
-        padding: 15px 0;
-    }
-    [data-testid="stMetricLabel"] {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    [data-testid="stMetricDeltaIcon-Up"] {
-        position: relative;
-        left: 38%;
-        transform: translateX(-50%);
-    }
-    [data-testid="stMetricDeltaIcon-Down"] {
-        position: relative;
-        left: 38%;
-        transform: translateX(-50%);
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# ───────────────────────────
+# Load data
+# ───────────────────────────
+DATA_DIR = Path("data")
+campaign_df   = pd.read_csv(DATA_DIR / "Mental_Health_Campaign_News_Dataset.csv")
+session_df    = pd.read_csv(DATA_DIR / "Counseling_Center_Statistics_Dataset.csv")
+stress_df     = pd.read_csv(DATA_DIR / "Student_Stress_Survey_Dataset.csv")
+pop_df        = pd.read_csv(DATA_DIR / "us-population-2010-2019-reshaped.csv")  # state, year, population
 
-# -----------------------------------------------------------------------------
-# Data loading & preprocessing
-# -----------------------------------------------------------------------------
-@st.cache_data(show_spinner=False)
-def load_data():
-    """Load the three CSVs once and cache them."""
-    campaign = pd.read_csv("data/Mental_Health_Campaign_News_Dataset.csv")
-    session = pd.read_csv("data/Counseling_Center_Statistics_Dataset.csv")
-    stress = pd.read_csv("data/Student_Stress_Survey_Dataset.csv")
+# Ensure the date / year columns exist
+campaign_df["Year"] = pd.to_datetime(campaign_df["Date"]).dt.year.astype(str)
+session_df["Year"]  = session_df["Year"].astype(str)
 
-    # Campaign: extract year reliably from date column (assumed yyyy-mm-dd)
-    campaign["Year"] = pd.to_datetime(campaign["Date"], errors="coerce").dt.year
+# Harmonise university naming if needed
+for df in (campaign_df, session_df, stress_df):
+    if "University" in df.columns:
+        df["University"] = df["University"].str.strip()
 
-    # Ensure session Year column is int (already present in CSV)
-    session["Year"] = session["Year"].astype(int)
-
-    # Stress survey: ensure categorical columns exist if present
-    if "Stress_Level" in stress.columns:
-        stress["Stress_Level"] = stress["Stress_Level"].astype(str)
-    return campaign, session, stress
-
-campaign_df_all, session_df_all, stress_df_all = load_data()
-
-# -----------------------------------------------------------------------------
+# ───────────────────────────
 # Sidebar filters
-# -----------------------------------------------------------------------------
+# ───────────────────────────
 with st.sidebar:
-    st.title("Student Stress Dashboard")
+    st.title("📊 Filters")
+    years      = sorted({*campaign_df["Year"], *session_df["Year"]})
+    universities = sorted(stress_df["University"].unique())
 
-    year_options = sorted(session_df_all["Year"].unique())
-    year_options.insert(0, "All")
-    selected_year = st.selectbox("Select a year", year_options)
+    year_sel   = st.multiselect("Year", years, default=years)
+    uni_sel    = st.multiselect("University", universities, default=universities)
 
-    if selected_year != "All":
-        yr = int(selected_year)
-        session_df = session_df_all[session_df_all["Year"] == yr]
-        campaign_df = campaign_df_all[campaign_df_all["Year"] == yr]
-        stress_df = (
-            stress_df_all[stress_df_all["Year"] == yr]
-            if "Year" in stress_df_all.columns else stress_df_all
-        )
-    else:
-        session_df, campaign_df, stress_df = (
-            session_df_all,
-            campaign_df_all,
-            stress_df_all,
-        )
+# Apply filters
+session_f = session_df[session_df["Year"].isin(year_sel) & session_df["University"].isin(uni_sel)]
+stress_f  = stress_df [stress_df ["University"].isin(uni_sel)]
+camp_f    = campaign_df[campaign_df["Year"].isin(year_sel) & campaign_df["University"].isin(uni_sel)]
 
-    # Optional University filter if column exists
-    if "University" in session_df.columns:
-        univ_options = sorted(session_df["University"].unique())
-        univ_options.insert(0, "All")
-        selected_univ = st.selectbox("Select a university", univ_options)
+# ───────────────────────────
+# Helper cache decorators
+# ───────────────────────────
+@st.cache_data
+def bigram_freq(series, n=20):
+    tokenizer = nltk.RegexpTokenizer(r"[A-Za-z']+")
+    bigrams = Counter()
+    for txt in series.dropna().astype(str):
+        tokens = tokenizer.tokenize(txt.lower())
+        bigrams.update(zip(tokens, tokens[1:]))
+    return pd.DataFrame(bigrams.most_common(n), columns=["bigram", "count"])
 
-        if selected_univ != "All":
-            session_df = session_df[session_df["University"] == selected_univ]
-            campaign_df = campaign_df[campaign_df["University"] == selected_univ]
-            if "University" in stress_df.columns:
-                stress_df = stress_df[stress_df["University"] == selected_univ]
+# ───────────────────────────
+# 1 & 2 — Counselling load over time
+# ───────────────────────────
+with st.expander("1‑2 | Counselling centre load over time"):
+    c1, c2 = st.columns(2)
 
-# -----------------------------------------------------------------------------
-# Helper to notify about missing optional deps
-# -----------------------------------------------------------------------------
-
-def _warn_missing(lib_name: str, pip_str: str = ""):
-    st.warning(
-        f"Optional dependency **{lib_name}** is not installed. "
-        f"Install with `pip install {pip_str or lib_name.lower()}` to enable this chart.")
-
-# -----------------------------------------------------------------------------
-# Chart‑builder helper functions (10 total)
-# -----------------------------------------------------------------------------
-
-def draw_sessions_trend(df: pd.DataFrame):
-    if df.empty:
-        st.info("No data for selected filters.")
-        return
-    chart = (
-        alt.Chart(df)
-        .mark_area(opacity=0.4)
+    # 1️⃣ line chart: students vs sessions
+    line = (
+        alt.Chart(session_f.melt(id_vars=["Year","University"],
+                                 value_vars=["Sessions Held","Students Served"],
+                                 var_name="Metric"))
+        .mark_line(point=True)
         .encode(
             x="Year:O",
-            y="sum(Sessions_Held):Q",
-            color="University:N",
-            tooltip=["University", "Year", "sum(Sessions_Held)"]
+            y=alt.Y("value:Q", title="Count"),
+            color="Metric",
+            tooltip=["University","Metric","value"]
         )
-        .properties(height=300)
+        .facet(row="University")
+        .properties(height=120)
     )
-    st.altair_chart(chart, use_container_width=True)
+    c1.altair_chart(line, use_container_width=True)
 
-
-def draw_sessions_bubble(df: pd.DataFrame):
-    if df.empty:
-        st.info("No data for selected filters.")
-        return
-    if HAS_PLOTLY:
-        fig = px.scatter(
-            df,
-            x="Sessions_Held",
-            y="Students_Served",
-            size="Avg_Session_Duration",
-            color="University" if "University" in df.columns else None,
-            hover_data=["Year"],
-            title="Workload Bubble Chart",
+    # 2️⃣ stacked‑area share of sessions
+    share = (
+        alt.Chart(session_f)
+        .mark_area()
+        .encode(
+            x="Year:O",
+            y=alt.Y("sum(Sessions Held):Q", stack="normalize", title="Share"),
+            color="University",
+            tooltip=["University","sum(Sessions Held)"]
         )
-        st.plotly_chart(fig, use_container_width=True)
-    else:
-        _warn_missing("plotly-express", "plotly")
-
-
-def draw_sessions_heatmap(df: pd.DataFrame):
-    if df.empty:
-        st.info("No data for selected filters.")
-        return
-    pivot = (
-        df.pivot_table(index="University", columns="Year", values="Sessions_Held", aggfunc="sum")
-        .reset_index()
-        .melt("University", var_name="Year", value_name="Sessions_Held")
     )
-    chart = (
-        alt.Chart(pivot)
+    c2.altair_chart(share, use_container_width=True)
+
+# ───────────────────────────
+# 3 — Avg session duration heat‑map
+# ───────────────────────────
+with st.expander("3 | Session duration heat‑map"):
+    heat = (
+        alt.Chart(session_f)
         .mark_rect()
         .encode(
             x="Year:O",
             y="University:N",
-            color=alt.Color("Sessions_Held:Q", scale=alt.Scale(scheme="inferno")),
-            tooltip=["University", "Year", "Sessions_Held"]
-        ).properties(height=300)
+            color=alt.Color("mean(Avg Session Duration):Q", scale=alt.Scale(scheme="magma")),
+            tooltip=["University","Year","mean(Avg Session Duration)"]
+        )
     )
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(heat, use_container_width=True)
 
-
-def draw_stress_stacked_bar(df: pd.DataFrame):
-    if df.empty or "Stress_Level" not in df.columns:
-        st.info("Stress level data unavailable for selected filters.")
-        return
-    chart = (
-        alt.Chart(df)
+# ───────────────────────────
+# 4 — Stress‑level distribution per university
+# ───────────────────────────
+with st.expander("4 | Stress‑level distribution"):
+    order = ["Low","Moderate","High"]
+    bar = (
+        alt.Chart(stress_f)
         .mark_bar()
         .encode(
-            x="count():Q",
+            x=alt.X("count():Q", title="Students"),
             y="University:N",
-            color="Stress_Level:N",
-            tooltip=["University", "Stress_Level", "count()"]
-        ).properties(height=300)
+            color=alt.Color("Stress Level:N", scale=alt.Scale(domain=order, range=["green","orange","red"])),
+            column=alt.Column("Stress Level:N", sort=order)
+        )
+        .properties(height=200)
     )
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(bar, use_container_width=True)
 
+# ───────────────────────────
+# 5 — Sleep vs stress violin
+# ───────────────────────────
+with st.expander("5 | Sleep hours vs stress level"):
+    vio = px.violin(
+        stress_f, y="Avg Sleep Hours", x="Stress Level",
+        box=True, points="all", hover_data=["University"]
+    )
+    st.plotly_chart(vio, use_container_width=True)
 
-def draw_sleep_violin(df: pd.DataFrame):
-    if df.empty or "Avg_Sleep_Hours" not in df.columns:
-        st.info("Sleep data unavailable for selected filters.")
-        return
-    if HAS_PLOTLY:
-        fig = px.violin(
-            df,
-            y="Avg_Sleep_Hours",
-            x="Stress_Level" if "Stress_Level" in df.columns else None,
-            color="Gender" if "Gender" in df.columns else None,
-            box=True,
-            points="all",
-            title="Sleep Hours vs Stress Level",
-        )
-        st.plotly_chart(fig, use_container_width=True)
+# ───────────────────────────
+# 6 — Sunburst of stress factors
+# ───────────────────────────
+with st.expander("6 | Primary stress factors"):
+    sun = px.sunburst(
+        stress_f,
+        path=["Stress Level","Primary Stress Factor"],
+        values=None,
+        color="Stress Level",
+        color_discrete_map={"Low":"green","Moderate":"orange","High":"red"}
+    )
+    st.plotly_chart(sun, use_container_width=True)
+
+# ───────────────────────────
+# 7 — Text bigram frequency (session notes or campaign headlines)
+# ───────────────────────────
+with st.expander("7 | Common bigrams in counselling notes / campaign headlines"):
+    source_col = st.radio("Choose text source", ["Counselling Notes","Campaign Headline"])
+    if source_col == "Counselling Notes" and "Notes" in session_f.columns:
+        text_series = session_f["Notes"]
     else:
-        _warn_missing("plotly-express", "plotly")
+        text_series = camp_f["Headline"]
+    top_bi = bigram_freq(text_series)
 
-
-def draw_stress_treemap(df: pd.DataFrame):
-    if df.empty or "Primary_Stress_Factor" not in df.columns:
-        st.info("Stress factor data unavailable for selected filters.")
-        return
-    if HAS_PLOTLY:
-        fig = px.treemap(df, path=["Primary_Stress_Factor"], title="Share of Primary Stress Factors")
-        st.plotly_chart(fig, use_container_width=True)
-    else:
-        _warn_missing("plotly-express", "plotly")
-
-
-def draw_stress_sunburst(df: pd.DataFrame):
-    required = {"Stress_Level", "Seeks_Help", "Gender"}
-    if df.empty or not required.issubset(df.columns):
-        st.info("Sunburst requires Stress_Level, Seeks_Help, and Gender columns.")
-        return
-    if HAS_PLOTLY:
-        fig = px.sunburst(df, path=["Stress_Level", "Seeks_Help", "Gender"], title="Help‑Seeking Path by Stress Level")
-        st.plotly_chart(fig, use_container_width=True)
-    else:
-        _warn_missing("plotly-express", "plotly")
-
-
-def draw_age_hist(df: pd.DataFrame):
-    if df.empty or "Age" not in df.columns:
-        st.info("Age data unavailable for selected filters.")
-        return
-    if HAS_PLOTLY:
-        fig = px.histogram(
-            df,
-            x="Age",
-            color="Stress_Level" if "Stress_Level" in df.columns else None,
-            nbins=20,
-            marginal="box",
-            title="Age Distribution of Survey Participants",
-        )
-        st.plotly_chart(fig, use_container_width=True)
-    else:
-        # Altair fallback histogram
-        chart = (
-            alt.Chart(df)
-            .mark_bar()
-            .encode(x="Age:Q", y="count():Q", tooltip=["count()"])
-            .properties(height=300, title="Age Distribution (Altair fallback)")
-        )
-        st.altair_chart(chart, use_container_width=True)
-
-
-def draw_campaign_timeline(df: pd.DataFrame):
-    if df.empty:
-        st.info("No campaign data for selected filters.")
-        return
-    agg = df.groupby(["Year", "University" if "University" in df.columns else df.columns[0]]).size().reset_index(name="Headlines")
-    chart = (
-        alt.Chart(agg)
+    bigram_chart = (
+        alt.Chart(top_bi)
         .mark_bar()
         .encode(
-            x="Year:O",
-            y="Headlines:Q",
-            color="University:N" if "University" in agg.columns else alt.value("#BBBBBB"),
-            tooltip=[alt.Tooltip("Headlines:Q"), "Year"]
-        ).properties(height=300)
+            x="count:Q",
+            y=alt.Y("bigram:N", sort="-x"),
+            tooltip=["count"]
+        )
     )
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(bigram_chart, use_container_width=True)
 
+# ───────────────────────────
+# 8 — Capacity vs demand bubble
+# ───────────────────────────
+with st.expander("8 | Counselling capacity vs demand"):
+    # Map stress level to numeric for bubble size
+    level_map = {"Low":1, "Moderate":2, "High":3}
+    bubble_df = (
+        session_f.groupby("University")
+        .agg(Sessions=("Sessions Held","sum"),
+             Students=("Students Served","sum"))
+        .reset_index()
+        .merge(stress_f.groupby("University")["Stress Level"]
+               .apply(lambda s: s.map(level_map).median()).reset_index(),
+               on="University", how="left")
+        .rename(columns={"Stress Level":"MedianStress"})
+    )
+    fig8 = px.scatter(
+        bubble_df, x="Sessions", y="Students",
+        size="MedianStress", hover_name="University",
+        size_max=40
+    )
+    st.plotly_chart(fig8, use_container_width=True)
 
-def draw_session_notes_wordcloud(df: pd.DataFrame):
-    if df.empty or "Session_Notes" not in df.columns:
-        st.info("Session notes unavailable for selected filters.")
-        return
-    if not HAS_WORDCLOUD:
-        _warn_missing("wordcloud")
-        return
-    text = " ".join(df["Session_Notes"].dropna().astype(str).tolist())
-    if not text.strip():
-        st.info("Session notes are empty after filtering.")
-        return
-    wc = WordCloud(width=800, height=400, background_color="black", colormap="plasma").generate(text)
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.imshow(wc, interpolation="bilinear")
-    ax.axis("off")
-    st.pyplot(fig, use_container_width=True)
+# ───────────────────────────
+# 9 — Animated bar‑race of campaign articles
+# ───────────────────────────
+with st.expander("9 | Mental‑health news momentum"):
+    race = px.bar(
+        camp_f.groupby(["Year","University"]).size().reset_index(name="Articles"),
+        x="Articles", y="University", color="University",
+        orientation="h", animation_frame="Year", range_x=[0, camp_f.groupby(["Year","University"]).size().max()*1.2]
+    )
+    st.plotly_chart(race, use_container_width=True)
 
-# -----------------------------------------------------------------------------
-# Dashboard layout – sections & expanders
-# -----------------------------------------------------------------------------
-st.header("Counseling Center Statistics")
-with st.expander("Utilization Charts", expanded=True):
-    draw_sessions_trend(session_df)
-    draw_sessions_bubble(session_df)
-    draw_sessions_heatmap(session_df)
+# ───────────────────────────
+# 10 — Choropleth sessions per‑capita
+# ───────────────────────────
+with st.expander("10 | Sessions per‑capita by state"):
+    # Assume session_df has State column
+    percap = (
+        session_f.groupby(["Year","State"]).agg(TotalSessions=("Sessions Held","sum")).reset_index()
+        .merge(pop_df.rename(columns={"state":"State","year":"Year","population":"Population"}), on=["State","Year"])
+    )
+    percap["SessionsPer100k"] = percap["TotalSessions"] / percap["Population"] * 100_000
 
-st.header("Student Stress Survey")
-with st.expander("Stress Insights", expanded=True):
-    draw_stress_stacked_bar(stress_df)
-    draw_sleep_violin(stress_df)
-    draw_stress_treemap(stress_df)
-    draw_stress_sunburst(stress_df)
-    draw_age_hist(stress_df)
+    year_choice = st.select_slider("Year for map", sorted(percap["Year"].unique()), value=max(year_sel))
+    map_df = percap[percap["Year"] == str(year_choice)]
 
-st.header("Mental‑Health Campaign News")
-with st.expander("Visibility over Time", expanded=True):
-    draw_campaign_timeline(campaign_df)
+    fig10 = px.choropleth(
+        map_df,
+        locations="State", locationmode="USA-states",
+        color="SessionsPer100k",
+        color_continuous_scale="blues",
+        scope="usa",
+        labels={"SessionsPer100k":"Sessions / 100k"}
+    )
+    st.plotly_chart(fig10, use_container_width=True)
 
-st.header("Session Notes NLP")
-with st.expander("Common Themes in Counseling Notes", expanded=False):
-    draw_session_notes_wordcloud(session_df)
-
-# -----------------------------------------------------------------------------
-# End of file
-# -----------------------------------------------------------------------------
+st.caption("© 2025 Student‑Mental‑Health Dashboard | Built with Streamlit, Altair, and Plotly")
