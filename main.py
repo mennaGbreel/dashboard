@@ -18,6 +18,15 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+import os, textwrap
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]  # /mount/src
+st.write("Current script:", __file__)
+st.write("Dir tree under /mount/src (first 40 entries):")
+tree = "\n".join(textwrap.wrap("\n".join(
+    str(p.relative_to(ROOT)) for p in ROOT.rglob("*")[:40]), 120))
+st.code(tree)
 alt.themes.enable("dark")
 
 # ───────────────────────────
