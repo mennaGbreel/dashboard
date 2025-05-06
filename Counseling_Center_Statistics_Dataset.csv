@@ -1,0 +1,37 @@
+University,Year,Sessions_Held,Students_Served,Avg_Session_Duration_Min
+Harvard,2018,2711,826,54.8
+Harvard,2019,1239,341,47.0
+Harvard,2020,1359,281,75.3
+Harvard,2021,2679,967,47.7
+Harvard,2022,760,826,47.7
+Harvard,2023,2049,190,42.0
+Stanford,2018,2324,1230,51.2
+Stanford,2019,2930,608,56.1
+Stanford,2020,1025,1098,62.0
+Stanford,2021,1463,1480,35.1
+Stanford,2022,2565,1243,47.5
+Stanford,2023,1218,782,54.5
+Oxford,2018,1845,825,55.9
+Oxford,2019,738,1042,50.1
+Oxford,2020,2679,1448,55.4
+Oxford,2021,2926,915,41.9
+Oxford,2022,1044,699,65.6
+Oxford,2023,2921,192,59.9
+Tokyo University,2018,2777,963,36.6
+Tokyo University,2019,2920,679,39.2
+Tokyo University,2020,2797,870,39.5
+Tokyo University,2021,1871,1219,56.8
+Tokyo University,2022,1318,642,37.2
+Tokyo University,2023,2805,979,46.7
+University of Toronto,2018,404,644,54.5
+University of Toronto,2019,2155,1147,49.3
+University of Toronto,2020,1579,410,52.6
+University of Toronto,2021,565,1009,39.3
+University of Toronto,2022,347,413,55.9
+University of Toronto,2023,2597,792,43.9
+Kuwait University,2018,718,890,46.8
+Kuwait University,2019,883,427,52.4
+Kuwait University,2020,1756,1287,51.0
+Kuwait University,2021,1295,1390,50.2
+Kuwait University,2022,1965,663,42.5
+Kuwait University,2023,2522,1219,47.0

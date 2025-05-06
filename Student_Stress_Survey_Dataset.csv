@@ -1,0 +1,401 @@
+Student_ID,University,Age,Gender,Stress_Level,Primary_Stress_Factor,Avg_Sleep_Hours,Seeks_Help
+1,Kuwait University,27,Other,Low,Sleep Deprivation,5.0,Yes
+2,Tokyo University,21,Other,Moderate,Assignments,6.5,Yes
+3,Tokyo University,18,Other,High,Financial Stress,3.6,Yes
+4,Tokyo University,26,Male,Low,Family Issues,6.6,Yes
+5,University of Toronto,28,Female,Moderate,Financial Stress,8.9,No
+6,Oxford,20,Female,Severe,Financial Stress,4.5,No
+7,Oxford,21,Other,Low,Sleep Deprivation,4.9,No
+8,Oxford,28,Other,Severe,Exams,4.9,Yes
+9,Tokyo University,27,Male,High,Sleep Deprivation,6.2,Yes
+10,University of Toronto,20,Other,Low,Sleep Deprivation,4.4,Yes
+11,Stanford,29,Male,Moderate,Assignments,6.6,Yes
+12,Kuwait University,19,Other,Severe,Assignments,7.3,Yes
+13,Oxford,19,Other,Low,Sleep Deprivation,6.8,Yes
+14,Kuwait University,19,Other,Low,Family Issues,3.3,Yes
+15,Oxford,21,Female,Moderate,Assignments,7.5,Yes
+16,Oxford,23,Female,Severe,Sleep Deprivation,7.4,No
+17,Tokyo University,28,Male,Moderate,Assignments,7.2,No
+18,Oxford,21,Other,Moderate,Family Issues,6.6,No
+19,Oxford,24,Male,High,Exams,6.3,No
+20,Tokyo University,20,Male,Low,Sleep Deprivation,7.5,No
+21,University of Toronto,22,Male,Severe,Exams,8.9,No
+22,Stanford,22,Female,Moderate,Family Issues,4.6,Yes
+23,Tokyo University,30,Other,Low,Financial Stress,7.6,No
+24,Oxford,22,Other,Moderate,Family Issues,5.9,Yes
+25,Kuwait University,22,Female,Severe,Social Pressure,5.8,Yes
+26,Tokyo University,21,Female,Moderate,Exams,3.7,Yes
+27,Kuwait University,25,Female,Moderate,Financial Stress,5.6,Yes
+28,Harvard,22,Other,High,Financial Stress,4.5,No
+29,Kuwait University,19,Female,High,Sleep Deprivation,5.3,No
+30,Harvard,19,Other,Low,Assignments,4.4,No
+31,Oxford,30,Male,Moderate,Sleep Deprivation,5.3,No
+32,University of Toronto,18,Male,Low,Social Pressure,5.4,No
+33,University of Toronto,23,Male,Severe,Assignments,6.1,Yes
+34,Harvard,29,Female,Severe,Social Pressure,3.6,No
+35,University of Toronto,21,Other,Severe,Sleep Deprivation,3.8,No
+36,Harvard,24,Female,Moderate,Assignments,6.5,No
+37,Harvard,23,Female,Severe,Assignments,4.8,No
+38,Tokyo University,21,Female,Low,Sleep Deprivation,7.6,Yes
+39,Harvard,27,Male,Moderate,Family Issues,6.3,Yes
+40,Stanford,25,Female,Low,Exams,6.9,No
+41,Kuwait University,20,Male,Moderate,Assignments,8.1,No
+42,Harvard,18,Female,Low,Financial Stress,5.5,No
+43,Harvard,22,Other,Severe,Assignments,5.1,Yes
+44,Oxford,21,Other,Low,Exams,7.3,No
+45,University of Toronto,26,Other,Moderate,Exams,6.8,No
+46,Kuwait University,22,Other,Moderate,Sleep Deprivation,5.7,Yes
+47,Tokyo University,21,Female,High,Exams,8.1,Yes
+48,University of Toronto,27,Male,High,Exams,5.7,No
+49,Kuwait University,23,Female,Severe,Financial Stress,6.0,Yes
+50,Harvard,29,Male,Low,Sleep Deprivation,6.0,No
+51,Stanford,20,Male,Moderate,Sleep Deprivation,4.6,Yes
+52,Kuwait University,20,Male,Moderate,Assignments,6.1,Yes
+53,Oxford,25,Male,Severe,Assignments,8.1,Yes
+54,Harvard,19,Other,Moderate,Social Pressure,6.7,No
+55,Kuwait University,24,Male,Low,Assignments,6.0,No
+56,Tokyo University,18,Male,High,Exams,5.8,Yes
+57,Kuwait University,24,Male,Low,Assignments,6.5,Yes
+58,Harvard,20,Female,Low,Family Issues,7.1,Yes
+59,Kuwait University,20,Female,High,Family Issues,6.9,Yes
+60,University of Toronto,26,Other,Moderate,Family Issues,5.5,No
+61,Stanford,27,Female,High,Social Pressure,6.5,No
+62,University of Toronto,21,Other,Low,Assignments,6.7,No
+63,Oxford,24,Other,Severe,Exams,4.5,Yes
+64,Kuwait University,20,Male,Moderate,Sleep Deprivation,6.3,Yes
+65,University of Toronto,25,Female,Moderate,Exams,2.8,Yes
+66,University of Toronto,21,Male,Moderate,Exams,6.7,Yes
+67,Stanford,26,Other,Low,Social Pressure,7.0,Yes
+68,Oxford,22,Female,Moderate,Assignments,7.1,Yes
+69,Tokyo University,25,Male,Moderate,Assignments,5.4,Yes
+70,University of Toronto,20,Other,Severe,Exams,6.5,No
+71,Kuwait University,28,Other,Low,Sleep Deprivation,8.1,No
+72,Tokyo University,20,Other,High,Social Pressure,8.1,Yes
+73,Harvard,30,Male,Low,Sleep Deprivation,6.0,Yes
+74,Kuwait University,18,Male,High,Assignments,6.2,Yes
+75,Harvard,29,Male,Severe,Exams,7.7,No
+76,University of Toronto,28,Female,Low,Sleep Deprivation,3.7,Yes
+77,Kuwait University,20,Female,High,Family Issues,5.5,Yes
+78,University of Toronto,28,Female,High,Social Pressure,8.0,Yes
+79,Harvard,26,Male,Severe,Social Pressure,7.5,No
+80,University of Toronto,30,Male,Moderate,Assignments,6.6,No
+81,University of Toronto,27,Male,High,Family Issues,3.7,No
+82,Harvard,26,Female,Severe,Exams,5.9,Yes
+83,University of Toronto,18,Male,High,Assignments,5.1,No
+84,Oxford,28,Female,Low,Social Pressure,6.5,No
+85,University of Toronto,20,Female,Severe,Financial Stress,4.8,Yes
+86,Stanford,24,Male,High,Financial Stress,4.5,Yes
+87,Oxford,23,Other,Low,Social Pressure,2.9,No
+88,Stanford,30,Other,Severe,Sleep Deprivation,7.8,Yes
+89,University of Toronto,29,Male,Severe,Exams,5.4,No
+90,Stanford,21,Female,Severe,Financial Stress,6.2,No
+91,Harvard,30,Other,Moderate,Assignments,6.0,Yes
+92,Harvard,22,Male,Low,Family Issues,4.4,No
+93,University of Toronto,19,Other,Low,Social Pressure,4.1,No
+94,Kuwait University,20,Other,Severe,Family Issues,4.5,Yes
+95,University of Toronto,21,Female,Moderate,Financial Stress,4.9,Yes
+96,Tokyo University,22,Male,Moderate,Sleep Deprivation,6.5,Yes
+97,Stanford,29,Female,High,Sleep Deprivation,4.8,Yes
+98,University of Toronto,27,Other,High,Family Issues,8.6,No
+99,Stanford,18,Male,Severe,Sleep Deprivation,7.5,Yes
+100,Oxford,29,Other,Severe,Assignments,7.2,Yes
+101,Oxford,30,Female,Low,Family Issues,5.8,Yes
+102,Tokyo University,22,Other,Severe,Assignments,8.3,No
+103,Oxford,30,Female,Low,Assignments,5.7,No
+104,Stanford,29,Other,High,Social Pressure,6.0,Yes
+105,Oxford,21,Other,Low,Sleep Deprivation,6.3,Yes
+106,Tokyo University,24,Female,Severe,Social Pressure,7.1,No
+107,University of Toronto,27,Other,Low,Assignments,7.0,Yes
+108,Oxford,21,Other,Moderate,Social Pressure,5.3,No
+109,Kuwait University,20,Female,Low,Sleep Deprivation,5.2,No
+110,Harvard,22,Other,Low,Social Pressure,7.0,Yes
+111,Stanford,21,Male,High,Assignments,7.1,No
+112,University of Toronto,23,Other,Low,Family Issues,5.4,Yes
+113,Stanford,30,Male,Low,Exams,3.6,No
+114,University of Toronto,25,Other,Low,Financial Stress,5.7,Yes
+115,University of Toronto,21,Male,Low,Sleep Deprivation,6.9,Yes
+116,Tokyo University,21,Male,Severe,Sleep Deprivation,8.7,No
+117,Stanford,18,Female,Low,Sleep Deprivation,4.2,Yes
+118,Harvard,30,Other,Severe,Social Pressure,5.4,No
+119,Harvard,25,Other,Severe,Financial Stress,5.4,Yes
+120,Harvard,20,Male,Low,Exams,8.0,Yes
+121,Oxford,30,Female,Low,Financial Stress,5.9,Yes
+122,University of Toronto,26,Male,Moderate,Sleep Deprivation,4.6,No
+123,Oxford,25,Other,Severe,Social Pressure,6.8,No
+124,University of Toronto,19,Other,Severe,Exams,5.4,Yes
+125,Tokyo University,23,Other,High,Assignments,4.2,Yes
+126,Harvard,22,Other,Low,Exams,4.7,No
+127,Harvard,26,Female,Moderate,Assignments,8.6,No
+128,University of Toronto,25,Female,Low,Financial Stress,6.6,Yes
+129,Tokyo University,21,Male,Moderate,Assignments,6.2,Yes
+130,Harvard,21,Female,High,Social Pressure,5.6,No
+131,Tokyo University,19,Male,High,Exams,6.4,No
+132,Stanford,26,Other,Severe,Sleep Deprivation,6.4,Yes
+133,Oxford,28,Male,High,Assignments,6.4,No
+134,Tokyo University,24,Female,Low,Financial Stress,6.2,Yes
+135,Harvard,29,Male,Severe,Exams,7.3,Yes
+136,Stanford,18,Other,Moderate,Social Pressure,6.0,No
+137,Tokyo University,27,Male,Low,Family Issues,4.5,Yes
+138,Kuwait University,25,Male,High,Sleep Deprivation,5.1,Yes
+139,Harvard,20,Male,High,Social Pressure,3.0,No
+140,Harvard,24,Other,Moderate,Family Issues,9.0,Yes
+141,Tokyo University,28,Female,Severe,Financial Stress,7.3,Yes
+142,University of Toronto,21,Other,High,Social Pressure,4.8,Yes
+143,Harvard,21,Female,Low,Financial Stress,5.6,No
+144,Stanford,23,Female,Moderate,Family Issues,5.0,Yes
+145,Tokyo University,18,Male,Moderate,Sleep Deprivation,8.3,No
+146,University of Toronto,29,Male,Low,Exams,3.9,No
+147,Tokyo University,29,Other,Low,Financial Stress,6.2,Yes
+148,University of Toronto,23,Other,Low,Social Pressure,5.8,No
+149,University of Toronto,20,Male,Severe,Social Pressure,7.2,Yes
+150,Tokyo University,30,Other,Severe,Financial Stress,5.8,No
+151,Kuwait University,22,Other,Severe,Exams,3.4,No
+152,Stanford,26,Female,Severe,Sleep Deprivation,5.6,Yes
+153,Stanford,23,Other,Low,Social Pressure,4.5,Yes
+154,University of Toronto,22,Other,Moderate,Assignments,6.1,Yes
+155,Harvard,20,Male,High,Assignments,8.2,No
+156,Tokyo University,27,Other,Low,Family Issues,3.4,Yes
+157,University of Toronto,25,Male,Severe,Sleep Deprivation,4.8,Yes
+158,Tokyo University,30,Female,Low,Sleep Deprivation,5.2,No
+159,Stanford,29,Male,High,Financial Stress,5.4,Yes
+160,University of Toronto,27,Male,High,Sleep Deprivation,7.1,No
+161,Kuwait University,21,Other,Moderate,Sleep Deprivation,5.7,Yes
+162,Oxford,18,Female,Severe,Sleep Deprivation,6.6,Yes
+163,Stanford,29,Other,Severe,Social Pressure,5.1,Yes
+164,University of Toronto,30,Male,Severe,Financial Stress,6.3,No
+165,University of Toronto,28,Male,Severe,Sleep Deprivation,7.2,No
+166,Harvard,30,Other,Severe,Financial Stress,4.9,No
+167,Oxford,24,Other,Low,Assignments,7.2,Yes
+168,University of Toronto,25,Female,Low,Sleep Deprivation,6.1,Yes
+169,Stanford,30,Other,High,Financial Stress,7.6,No
+170,Harvard,22,Male,High,Family Issues,5.7,Yes
+171,Stanford,27,Female,High,Sleep Deprivation,6.6,Yes
+172,Harvard,20,Female,Moderate,Exams,5.9,Yes
+173,Kuwait University,26,Female,Severe,Family Issues,5.9,Yes
+174,Harvard,19,Female,Moderate,Exams,6.4,Yes
+175,Kuwait University,21,Other,High,Exams,6.8,Yes
+176,Harvard,24,Other,Low,Financial Stress,4.1,No
+177,Harvard,22,Other,Low,Sleep Deprivation,8.2,No
+178,Harvard,25,Female,Moderate,Sleep Deprivation,3.2,Yes
+179,University of Toronto,25,Other,Severe,Sleep Deprivation,5.0,Yes
+180,Harvard,29,Female,Moderate,Sleep Deprivation,5.9,No
+181,Oxford,18,Female,Severe,Family Issues,6.6,No
+182,Tokyo University,20,Male,Severe,Assignments,8.4,No
+183,Tokyo University,28,Male,Moderate,Social Pressure,3.2,Yes
+184,University of Toronto,30,Male,Severe,Sleep Deprivation,5.2,No
+185,Tokyo University,18,Male,Low,Social Pressure,2.8,Yes
+186,Tokyo University,26,Other,High,Exams,6.0,Yes
+187,Stanford,21,Female,Moderate,Exams,6.4,Yes
+188,Oxford,23,Other,Moderate,Assignments,8.4,No
+189,Tokyo University,19,Female,Low,Family Issues,6.2,Yes
+190,Stanford,20,Other,Low,Exams,7.6,Yes
+191,Harvard,24,Male,Moderate,Family Issues,6.9,Yes
+192,University of Toronto,28,Female,Moderate,Family Issues,5.3,No
+193,University of Toronto,27,Female,Severe,Exams,3.9,Yes
+194,Stanford,25,Male,High,Social Pressure,6.4,No
+195,University of Toronto,18,Other,Moderate,Financial Stress,3.8,No
+196,Harvard,20,Female,High,Financial Stress,7.9,Yes
+197,Harvard,24,Female,High,Exams,5.8,Yes
+198,Tokyo University,21,Other,High,Exams,7.8,No
+199,Tokyo University,26,Male,Moderate,Family Issues,5.3,No
+200,Kuwait University,26,Male,Moderate,Exams,6.4,Yes
+201,Stanford,28,Male,Severe,Financial Stress,6.3,Yes
+202,Harvard,28,Male,High,Financial Stress,5.9,No
+203,Stanford,27,Other,High,Sleep Deprivation,5.4,No
+204,Kuwait University,28,Other,Severe,Assignments,6.6,No
+205,Stanford,26,Male,Low,Financial Stress,4.6,Yes
+206,University of Toronto,28,Female,Severe,Exams,4.2,No
+207,Stanford,27,Female,Low,Family Issues,7.9,No
+208,Tokyo University,28,Male,Severe,Family Issues,7.1,Yes
+209,Tokyo University,25,Male,Severe,Financial Stress,6.1,Yes
+210,Harvard,23,Male,Severe,Financial Stress,8.5,Yes
+211,Harvard,28,Male,Moderate,Assignments,5.6,No
+212,Oxford,28,Male,Low,Family Issues,8.0,No
+213,Harvard,30,Female,Severe,Exams,6.3,No
+214,Tokyo University,27,Male,Low,Financial Stress,4.5,Yes
+215,Harvard,27,Male,High,Financial Stress,8.8,No
+216,Tokyo University,30,Other,Low,Financial Stress,7.5,No
+217,Stanford,24,Other,High,Financial Stress,5.8,Yes
+218,Stanford,20,Male,High,Exams,7.1,Yes
+219,Kuwait University,26,Female,High,Financial Stress,5.4,No
+220,Kuwait University,20,Female,High,Sleep Deprivation,7.2,Yes
+221,Kuwait University,19,Female,High,Family Issues,2.4,No
+222,Harvard,29,Other,Severe,Exams,4.5,No
+223,Stanford,21,Other,Severe,Family Issues,7.5,No
+224,Tokyo University,21,Other,Moderate,Exams,5.6,No
+225,Oxford,24,Male,Low,Sleep Deprivation,6.3,No
+226,Tokyo University,27,Other,Severe,Family Issues,4.0,Yes
+227,University of Toronto,27,Female,Severe,Sleep Deprivation,8.8,Yes
+228,Stanford,23,Other,Moderate,Family Issues,7.8,Yes
+229,Kuwait University,26,Female,Low,Family Issues,5.7,Yes
+230,Kuwait University,28,Male,High,Exams,5.4,No
+231,Harvard,28,Female,Severe,Family Issues,7.5,No
+232,Kuwait University,25,Other,Low,Exams,9.0,Yes
+233,Stanford,22,Other,Moderate,Sleep Deprivation,7.4,No
+234,Oxford,22,Female,Moderate,Financial Stress,9.3,No
+235,Tokyo University,27,Female,Moderate,Assignments,4.6,No
+236,University of Toronto,22,Male,Moderate,Sleep Deprivation,4.8,Yes
+237,Kuwait University,26,Other,High,Family Issues,4.2,Yes
+238,Stanford,26,Other,Low,Social Pressure,6.7,No
+239,Stanford,22,Male,High,Assignments,6.3,No
+240,Kuwait University,25,Male,High,Family Issues,5.8,Yes
+241,University of Toronto,20,Female,Moderate,Sleep Deprivation,7.2,Yes
+242,Oxford,26,Other,High,Exams,7.8,Yes
+243,University of Toronto,19,Other,Severe,Social Pressure,3.7,No
+244,Harvard,28,Female,High,Family Issues,5.1,No
+245,Harvard,27,Female,Severe,Sleep Deprivation,7.2,No
+246,Oxford,21,Male,Moderate,Social Pressure,5.3,Yes
+247,Kuwait University,26,Other,Low,Exams,4.8,No
+248,University of Toronto,25,Male,Low,Assignments,7.5,No
+249,University of Toronto,21,Female,Low,Exams,4.1,No
+250,Stanford,24,Female,Low,Social Pressure,5.5,No
+251,Tokyo University,19,Female,High,Assignments,6.5,Yes
+252,Stanford,29,Male,High,Financial Stress,5.1,Yes
+253,Tokyo University,25,Other,Low,Assignments,7.2,No
+254,Tokyo University,23,Male,Low,Financial Stress,5.1,No
+255,Stanford,29,Other,Low,Social Pressure,8.1,Yes
+256,Harvard,30,Female,Moderate,Family Issues,5.8,No
+257,University of Toronto,26,Male,Severe,Financial Stress,7.0,Yes
+258,University of Toronto,29,Male,Severe,Exams,7.1,No
+259,Oxford,20,Male,High,Family Issues,5.1,Yes
+260,Stanford,23,Other,Severe,Family Issues,2.9,Yes
+261,Oxford,30,Other,Severe,Family Issues,6.5,No
+262,Oxford,22,Male,Moderate,Family Issues,6.1,No
+263,University of Toronto,23,Other,High,Financial Stress,6.8,No
+264,Kuwait University,27,Female,High,Social Pressure,5.7,No
+265,Stanford,26,Male,High,Financial Stress,5.4,Yes
+266,Harvard,30,Other,Severe,Social Pressure,9.0,Yes
+267,Stanford,18,Male,Low,Assignments,3.8,No
+268,Oxford,28,Male,Moderate,Exams,7.1,Yes
+269,Stanford,28,Male,High,Social Pressure,5.1,Yes
+270,Stanford,18,Female,High,Family Issues,5.5,Yes
+271,University of Toronto,21,Other,Severe,Financial Stress,5.5,Yes
+272,Kuwait University,19,Female,High,Social Pressure,4.8,No
+273,Tokyo University,27,Other,Severe,Assignments,6.9,No
+274,Kuwait University,21,Female,Severe,Sleep Deprivation,8.1,No
+275,Kuwait University,22,Other,Severe,Assignments,6.7,Yes
+276,Stanford,23,Other,Moderate,Social Pressure,6.2,No
+277,Stanford,19,Other,Moderate,Assignments,4.5,Yes
+278,Kuwait University,20,Male,Low,Assignments,6.8,Yes
+279,University of Toronto,20,Other,Low,Sleep Deprivation,9.2,No
+280,University of Toronto,19,Male,Severe,Sleep Deprivation,5.4,Yes
+281,Harvard,26,Male,Severe,Social Pressure,5.4,No
+282,Stanford,21,Other,Severe,Social Pressure,5.2,Yes
+283,University of Toronto,20,Female,Severe,Financial Stress,5.3,Yes
+284,Kuwait University,25,Male,Moderate,Social Pressure,1.9,No
+285,Tokyo University,23,Female,High,Financial Stress,6.6,No
+286,Tokyo University,20,Female,Moderate,Financial Stress,4.7,Yes
+287,Oxford,20,Other,Low,Financial Stress,3.6,No
+288,Tokyo University,28,Other,Moderate,Sleep Deprivation,7.1,Yes
+289,Tokyo University,18,Other,Moderate,Sleep Deprivation,4.4,No
+290,Harvard,28,Female,Moderate,Exams,5.5,No
+291,Kuwait University,21,Male,Severe,Sleep Deprivation,8.2,Yes
+292,University of Toronto,28,Other,Moderate,Exams,3.9,No
+293,Stanford,20,Male,Moderate,Sleep Deprivation,3.7,No
+294,Stanford,19,Other,Severe,Social Pressure,6.4,Yes
+295,Kuwait University,22,Male,Moderate,Assignments,7.7,Yes
+296,Oxford,28,Female,Moderate,Financial Stress,3.6,Yes
+297,Oxford,26,Female,High,Family Issues,6.6,Yes
+298,Tokyo University,29,Other,Severe,Sleep Deprivation,6.9,No
+299,Stanford,20,Female,High,Assignments,2.9,Yes
+300,University of Toronto,23,Female,High,Financial Stress,7.2,No
+301,University of Toronto,29,Other,Low,Assignments,7.3,No
+302,University of Toronto,27,Female,Low,Assignments,5.5,Yes
+303,Tokyo University,19,Male,Low,Social Pressure,7.9,Yes
+304,Kuwait University,27,Female,Severe,Sleep Deprivation,7.7,Yes
+305,Stanford,25,Other,High,Assignments,6.2,Yes
+306,Stanford,20,Male,Low,Assignments,5.3,No
+307,Tokyo University,29,Other,Low,Financial Stress,4.5,Yes
+308,Stanford,18,Male,High,Financial Stress,5.9,No
+309,University of Toronto,30,Other,Severe,Financial Stress,6.9,No
+310,Oxford,28,Male,High,Sleep Deprivation,5.5,No
+311,Stanford,21,Other,Severe,Exams,2.7,Yes
+312,Stanford,18,Female,High,Assignments,7.9,No
+313,Kuwait University,19,Other,High,Exams,6.3,No
+314,Harvard,23,Male,Moderate,Sleep Deprivation,5.4,Yes
+315,Harvard,30,Male,Moderate,Sleep Deprivation,7.3,No
+316,Kuwait University,18,Male,High,Assignments,8.3,No
+317,Oxford,28,Other,Moderate,Exams,1.8,Yes
+318,Harvard,27,Female,Severe,Exams,6.7,Yes
+319,Kuwait University,27,Female,Low,Financial Stress,3.9,Yes
+320,Stanford,24,Male,Moderate,Sleep Deprivation,6.7,Yes
+321,Harvard,21,Male,Low,Sleep Deprivation,6.2,No
+322,Tokyo University,25,Other,Moderate,Exams,7.0,Yes
+323,University of Toronto,30,Other,Low,Exams,5.3,Yes
+324,Tokyo University,24,Male,Moderate,Assignments,3.2,Yes
+325,Harvard,27,Other,Low,Family Issues,5.3,Yes
+326,Kuwait University,23,Other,Severe,Assignments,6.6,Yes
+327,University of Toronto,29,Other,Moderate,Exams,7.5,No
+328,University of Toronto,21,Female,Severe,Social Pressure,4.2,Yes
+329,University of Toronto,18,Other,Moderate,Family Issues,7.5,No
+330,University of Toronto,19,Male,High,Assignments,5.0,Yes
+331,Harvard,22,Male,Severe,Sleep Deprivation,6.5,Yes
+332,Oxford,18,Other,High,Assignments,5.2,Yes
+333,University of Toronto,22,Female,Moderate,Exams,6.3,Yes
+334,Kuwait University,23,Female,Severe,Exams,7.3,Yes
+335,Stanford,29,Other,High,Assignments,4.2,No
+336,Harvard,30,Male,Moderate,Family Issues,5.0,Yes
+337,Stanford,22,Male,Severe,Social Pressure,6.3,No
+338,University of Toronto,23,Female,High,Assignments,9.6,Yes
+339,Harvard,22,Male,Moderate,Exams,4.7,Yes
+340,Tokyo University,18,Female,Low,Social Pressure,9.1,Yes
+341,Tokyo University,21,Other,Severe,Social Pressure,9.0,Yes
+342,Stanford,27,Other,Low,Family Issues,5.9,Yes
+343,Tokyo University,24,Other,Low,Family Issues,5.6,Yes
+344,Stanford,20,Female,Low,Social Pressure,5.0,No
+345,Oxford,20,Other,Low,Assignments,5.9,No
+346,Harvard,21,Male,Low,Exams,3.9,No
+347,Tokyo University,25,Other,Severe,Social Pressure,5.9,No
+348,Oxford,27,Male,High,Family Issues,8.2,No
+349,Oxford,22,Female,Moderate,Assignments,5.1,No
+350,Tokyo University,19,Male,High,Family Issues,5.6,No
+351,Harvard,19,Male,Low,Exams,3.4,Yes
+352,Harvard,21,Male,Severe,Financial Stress,6.6,Yes
+353,Harvard,25,Female,High,Exams,6.4,No
+354,Stanford,24,Other,Low,Financial Stress,6.1,Yes
+355,University of Toronto,19,Other,High,Family Issues,5.7,Yes
+356,Stanford,27,Male,Low,Social Pressure,5.6,Yes
+357,Tokyo University,19,Male,Low,Family Issues,6.8,No
+358,Harvard,21,Male,Severe,Sleep Deprivation,6.0,Yes
+359,Oxford,19,Male,High,Social Pressure,6.5,No
+360,Tokyo University,22,Male,Severe,Assignments,6.3,Yes
+361,Kuwait University,21,Male,Low,Financial Stress,7.7,No
+362,Stanford,23,Other,High,Family Issues,7.0,No
+363,Kuwait University,24,Other,High,Family Issues,6.3,Yes
+364,Stanford,19,Other,Low,Social Pressure,8.3,Yes
+365,Kuwait University,30,Male,Severe,Assignments,6.6,No
+366,Oxford,24,Female,Severe,Assignments,8.0,Yes
+367,Oxford,27,Male,Moderate,Assignments,6.9,No
+368,Harvard,18,Male,High,Family Issues,3.2,No
+369,Tokyo University,19,Female,High,Sleep Deprivation,8.0,Yes
+370,Harvard,30,Male,Low,Family Issues,6.2,No
+371,Kuwait University,25,Male,High,Exams,5.9,Yes
+372,Kuwait University,28,Female,Moderate,Financial Stress,6.4,Yes
+373,Kuwait University,27,Other,High,Financial Stress,5.5,Yes
+374,Oxford,21,Other,Low,Social Pressure,6.3,Yes
+375,Harvard,22,Other,Low,Financial Stress,5.1,No
+376,Kuwait University,27,Female,Severe,Financial Stress,7.9,No
+377,Kuwait University,21,Other,Low,Assignments,5.8,No
+378,University of Toronto,25,Other,Low,Family Issues,5.4,No
+379,University of Toronto,26,Other,High,Exams,4.6,No
+380,Tokyo University,19,Male,Moderate,Family Issues,6.4,No
+381,Harvard,25,Female,High,Assignments,6.3,Yes
+382,Stanford,30,Female,Severe,Assignments,6.6,Yes
+383,Kuwait University,29,Other,High,Financial Stress,4.5,Yes
+384,University of Toronto,25,Male,Low,Sleep Deprivation,3.6,No
+385,Stanford,24,Other,Moderate,Exams,6.9,Yes
+386,Tokyo University,18,Other,Severe,Financial Stress,8.2,Yes
+387,Harvard,19,Female,Low,Assignments,4.5,Yes
+388,Kuwait University,30,Other,High,Exams,8.4,Yes
+389,Stanford,23,Other,Severe,Assignments,6.4,Yes
+390,Harvard,25,Male,High,Sleep Deprivation,6.0,Yes
+391,Harvard,26,Female,High,Social Pressure,5.4,Yes
+392,Stanford,30,Male,Severe,Social Pressure,3.9,Yes
+393,University of Toronto,25,Other,High,Family Issues,7.5,Yes
+394,University of Toronto,20,Male,Low,Social Pressure,4.8,Yes
+395,Tokyo University,25,Female,Severe,Sleep Deprivation,4.8,Yes
+396,Stanford,21,Female,Low,Social Pressure,7.5,No
+397,Harvard,30,Other,Low,Assignments,3.2,No
+398,Kuwait University,27,Female,Moderate,Financial Stress,3.7,No
+399,University of Toronto,26,Male,Severe,Sleep Deprivation,6.0,No
+400,University of Toronto,28,Female,Low,Social Pressure,6.4,Yes
