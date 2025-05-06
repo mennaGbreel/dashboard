@@ -1,7 +1,13 @@
 #############################
 #  app.py  –  Mental‑Health Dashboard
 #############################
-
+import streamlit as st          #  ←  must be before any st.* call
+import pandas as pd
+import altair as alt
+import plotly.express as px
+import nltk, re
+from pathlib import Path
+from collections import Counter
 
 # ───────────────────────────
 # Page config & theme
