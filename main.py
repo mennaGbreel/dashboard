@@ -23,8 +23,8 @@ alt.themes.enable("dark")
 # ───────────────────────────
 # Locate the data folder (repo‑root/data)
 # ───────────────────────────
-BASE_DIR = Path(__file__).resolve().parent.parent      # ← up from /dashboard/
-DATA_DIR = BASE_DIR / "data"
+REPO_ROOT = Path(__file__).resolve().parent            # ← one level up is enough
+DATA_DIR   = REPO_ROOT / "data"
 
 # Optional one‑time check: list CSVs Streamlit can see
 # st.write("CSV files found:", list(DATA_DIR.glob("*.csv")))
@@ -44,8 +44,6 @@ session_df  = read_csv_must_exist(DATA_DIR / "Counseling_Center_Statistics_Datas
                                   "Counselling centre stats")
 stress_df   = read_csv_must_exist(DATA_DIR / "Student_Stress_Survey_Dataset.csv",
                                   "Student stress survey")
-pop_df      = read_csv_must_exist(DATA_DIR / "us-population-2010-2019-reshaped.csv",
-                                  "US population")
 
 # Ensure the date / year columns exist
 campaign_df["Year"] = pd.to_datetime(campaign_df["Date"]).dt.year.astype(str)
