@@ -12,6 +12,8 @@ from collections import Counter
 # Point to repo‑root/data no matter where this file sits
 BASE_DIR = Path(__file__).resolve().parent.parent   # one level up from dashboard/
 DATA_DIR = BASE_DIR / "data"
+
+st.write("CSV files I can see:", list(DATA_DIR.glob("*.csv")))
 # ───────────────────────────
 # Page config & theme
 # ───────────────────────────
