@@ -23,7 +23,7 @@ alt.themes.enable("dark")
 # ───────────────────────────
 # Locate the data folder (repo‑root/data)
 # ───────────────────────────
-REPO_ROOT = Path(__file__).resolve().parent            # ← one level up is enough
+REPO_ROOT = Path(__file__).resolve()           # ← one level up is enough
 DATA_DIR   = REPO_ROOT / "data"
 
 # Optional one‑time check: list CSVs Streamlit can see
