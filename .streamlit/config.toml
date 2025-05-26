@@ -1,0 +1,7 @@
+[theme]
+base = "light"            # switch base theme to light
+primaryColor = "#3498db" # accent color (blue)
+backgroundColor = "#F7F9FA" # soft off-white
+secondaryBackgroundColor = "#ECEFF1" # light gray for containers
+textColor = "#111111"       # dark text for contrast
+font = "sans serif"
